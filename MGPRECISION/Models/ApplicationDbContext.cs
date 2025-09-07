@@ -21,13 +21,14 @@ namespace MGPRECISION.Models
                 s.Property(f => f.Codigo)
                 .HasColumnType("int").HasPrecision(5,0);
                 s.Property(f => f.Codigo).IsRequired();
-
+                s.Property(s => s.Estado).IsRequired();
             });
 
             modelBuilder.Entity<Lote>(l =>
             {
                 l.Property(s => s.Area)
                .HasColumnType("decimal(18,2)");
+                l.Property(s => s.Estado).IsRequired();
             });
             
             modelBuilder.Entity<Finca>().HasIndex( f => f.Codigo).IsUnique();

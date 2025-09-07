@@ -11,11 +11,12 @@ namespace MGPRECISION.Models
         public int Codigo { get; set; }
         public Decimal Area { get; set; }
         public int Sector { get; set; }
-
-        // Clave foránea hacia Finca
+        
+        public bool Estado { get; set; }
+       
         public int FincaId { get; set; }
 
-        // Propiedad de navegación hacia Finca (corregida)
+       
         public Finca Finca { get; set; }
     }
 }
