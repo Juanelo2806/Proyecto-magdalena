@@ -81,23 +81,41 @@ namespace MGPRECISION.Controllers
         }
 
         // GET: FincaController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Status(int id)
         {
-            return View();
+            var datos = await _context.Fincas.FindAsync(id);
+            if(datos == null)
+            {
+               return NotFound();
+            }
+            return View(datos);
         }
 
         // POST: FincaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> ConfirmarStatus(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                var datos = await _context.Fincas.FindAsync();
+                if (datos != null)
+                {
+                    datos.Estado = !datos.Estado;
+                  await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            catch
+            catch(Exception ex) 
             {
-                return View();
+                ModelState.AddModelError("", "la finca no se puede cambiar de estado" +
+                    " por alguna razon interna" + ex.Message);
+                return View("Error");
             }
         }
     }

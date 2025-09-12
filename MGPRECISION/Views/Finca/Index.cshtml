@@ -7,14 +7,14 @@
 <div class="container mt-4">
     <h2>@ViewData["Title"]</h2>
 
-    <!-- Botón para agregar nueva finca -->
+    <
     <div class="mb-3">
         <a asp-action="Create" class="btn btn-success">
             <i class="fas fa-plus"></i> Nueva Finca
         </a>
     </div>
 
-    @if (Model == null || !Model.Any)
+    @if (Model == null || !Model.Any())
     {
         <div class="alert alert-info text-center">
             <div class="py-4">
@@ -67,7 +67,7 @@
             </table>
         </div>
 
-        <!-- Contador de registros -->
+        
         <div class="mt-3">
             <span class="text-muted">Total: @Model.Count() fincas registradas</span>
         </div>
